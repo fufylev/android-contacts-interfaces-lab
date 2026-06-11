@@ -7,7 +7,11 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
+
+import androidx.annotation.IdRes;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.badge.BadgeUtils;
@@ -29,12 +33,6 @@ import ru.yandex.practicum.contacts.ui.widget.DividerItemDecoration;
 import ru.yandex.practicum.contacts.utils.android.Debouncer;
 import ru.yandex.practicum.contacts.utils.android.OnDebounceListener;
 import ru.yandex.practicum.contacts.utils.widget.EditTextUtils;
-
-import androidx.annotation.IdRes;
-import androidx.annotation.StringRes;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.lifecycle.ViewModelProvider;
 
 @SuppressLint("UnsafeExperimentalUsageError")
 public class MainActivity extends AppCompatActivity implements OnDebounceListener {
@@ -72,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements OnDebounceListene
         bindSearch();
         EditTextUtils.addTextListener(binding.searchLayout.searchText, query -> viewModel.updateSearchText(query.toString()));
 
-        binding.searchLayout.resetButton.setOnClickListener(view -> clearSearch());
+        binding.searchLayout.resetButton.setOnClickListener(v -> clearSearch());
 
         getSupportFragmentManager().setFragmentResultListener(SortDialogFragment.REQUEST_KEY, this, (requestKey, result) -> {
             final SortType newSortType = SortDialogFragment.from(result);
